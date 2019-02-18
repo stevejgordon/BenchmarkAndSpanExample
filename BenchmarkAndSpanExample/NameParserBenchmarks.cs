@@ -8,7 +8,7 @@ namespace BenchmarkAndSpanExample
     [MemoryDiagnoser]
     public class NameParserBenchmarks
     {
-        private static readonly string FullName = "Steve J Gordon";
+        private const string FullName = "Steve J Gordon";
         private static readonly NameParser Parser = new NameParser();
 
         [Benchmark(Baseline = true)]
