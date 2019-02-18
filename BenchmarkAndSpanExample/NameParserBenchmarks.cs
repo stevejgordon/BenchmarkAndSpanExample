@@ -3,8 +3,6 @@ using BenchmarkDotNet.Order;
 
 namespace BenchmarkAndSpanExample
 {
-    [RankColumn]
-    [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     [MemoryDiagnoser]
     public class NameParserBenchmarks
     {
