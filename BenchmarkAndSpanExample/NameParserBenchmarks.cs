@@ -11,16 +11,25 @@ namespace BenchmarkAndSpanExample
         private const string FullName = "Steve J Gordon";
         private static readonly NameParser Parser = new NameParser();
 
+        [Params(1, 500)]
+        public int Iterations { get; set; }
+
         [Benchmark(Baseline = true)]
         public void GetLastName()
         {
-            Parser.GetLastName(FullName);
+            for (var i = 0; i < Iterations; i++)
+            {
+                Parser.GetLastName(FullName);
+            }
         }
 
         [Benchmark]
         public void GetLastNameWithSpan()
         {
-            Parser.GetLastNameWithSpan(FullName);
+            for (var i = 0; i < Iterations; i++)
+            {
+                Parser.GetLastNameWithSpan(FullName);
+            }
         }
     }
 }
