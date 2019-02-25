@@ -18,6 +18,12 @@ namespace BenchmarkAndSpanExample
         }
 
         [Benchmark]
+        public void GetLastNameUsingSubstring()
+        {
+            Parser.GetLastNameUsingSubstring(FullName);
+        }
+
+        [Benchmark]
         public void GetLastNameWithSpan()
         {
             Parser.GetLastNameWithSpan(FullName);

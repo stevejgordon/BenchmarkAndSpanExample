@@ -14,27 +14,22 @@ namespace BenchmarkAndSpanExample
             return lastName ?? string.Empty;
         }
 
+        public string GetLastNameUsingSubstring(string fullName)
+        {
+            var lastSpaceIndex = fullName.LastIndexOf(" ", StringComparison.Ordinal);
+
+            return lastSpaceIndex == -1
+                ? string.Empty
+                : fullName.Substring(lastSpaceIndex + 1);
+        }
+
         public ReadOnlySpan<char> GetLastNameWithSpan(ReadOnlySpan<char> fullName)
         {
-            var lastSpacePosition = -1;
+            var lastSpaceIndex = fullName.LastIndexOf(' ');
 
-            ReadOnlySpan<char> nameSlice;
-
-            while (true)
-            {
-                nameSlice = fullName.Slice(lastSpacePosition + 1);
-                    
-                var spaceIndex = nameSlice.IndexOf(' ');
-
-                if (spaceIndex == -1)
-                {
-                    break;
-                }
-
-                lastSpacePosition = spaceIndex + lastSpacePosition + 1;
-            }
-
-            return lastSpacePosition == -1 ? ReadOnlySpan<char>.Empty : nameSlice;
+            return lastSpaceIndex == -1 
+                ? ReadOnlySpan<char>.Empty 
+                : fullName.Slice(lastSpaceIndex + 1);
         }
     }
 }
