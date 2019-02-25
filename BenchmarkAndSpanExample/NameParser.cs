@@ -18,9 +18,13 @@ namespace BenchmarkAndSpanExample
         {
             var lastSpacePosition = -1;
 
+            ReadOnlySpan<char> nameSlice;
+
             while (true)
             {
-                var spaceIndex = fullName.Slice(lastSpacePosition + 1).IndexOf(' ');
+                nameSlice = fullName.Slice(lastSpacePosition + 1);
+                    
+                var spaceIndex = nameSlice.IndexOf(' ');
 
                 if (spaceIndex == -1)
                 {
@@ -30,12 +34,7 @@ namespace BenchmarkAndSpanExample
                 lastSpacePosition = spaceIndex + lastSpacePosition + 1;
             }
 
-            if (lastSpacePosition == -1)
-                return string.Empty;
-
-            var lastName = fullName.Slice(lastSpacePosition + 1);
-
-            return lastName;
+            return lastSpacePosition == -1 ? ReadOnlySpan<char>.Empty : nameSlice;
         }
     }
 }
