@@ -13,15 +13,14 @@ namespace BenchmarkAndSpanExample
 
             return lastName ?? string.Empty;
         }
-        
-        public string GetLastNameWithSpan(string fullName)
+
+        public ReadOnlySpan<char> GetLastNameWithSpan(ReadOnlySpan<char> fullName)
         {
-            var fullNameSpan = fullName.AsSpan();
             var lastSpacePosition = -1;
 
-            while(true)
+            while (true)
             {
-                var spaceIndex = fullNameSpan.Slice(lastSpacePosition + 1).IndexOf(' ');
+                var spaceIndex = fullName.Slice(lastSpacePosition + 1).IndexOf(' ');
 
                 if (spaceIndex == -1)
                 {
@@ -34,7 +33,7 @@ namespace BenchmarkAndSpanExample
             if (lastSpacePosition == -1)
                 return string.Empty;
 
-            var lastName = fullNameSpan.Slice(lastSpacePosition + 1).ToString();
+            var lastName = fullName.Slice(lastSpacePosition + 1);
 
             return lastName;
         }
